@@ -1,4 +1,4 @@
-package com.example.themoviedb
+package com.example.themoviedb.util
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

@@ -1,4 +1,4 @@
-package com.example.themoviedb
+package com.example.themoviedb.util
 
 import android.widget.ImageView
 import android.widget.TextView
@@ -28,6 +28,8 @@ fun language(textView:TextView, text: String) {
         textView.text = "Telugu"
     }else if (text=="kn"){
         textView.text = "Kannada"
+    }else if (text=="no"){
+        textView.text = "Norwegian"
     }else{
         textView.text = text
     }

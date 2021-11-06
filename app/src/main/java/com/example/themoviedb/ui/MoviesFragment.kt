@@ -1,4 +1,4 @@
-package com.example.themoviedb
+package com.example.themoviedb.ui
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -6,9 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.themoviedb.R
+import com.example.themoviedb.data.network.MoviesApi
+import com.example.themoviedb.data.repositories.MoviesRepository
 import kotlinx.android.synthetic.main.movies_fragment.*
 
 class MoviesFragment : Fragment() {
@@ -30,7 +31,9 @@ class MoviesFragment : Fragment() {
         factory = MoviesViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory)[MoviesViewModel::class.java]
         viewModel.getNowPlaying()
-        viewModel.movies.observe(viewLifecycleOwner, { nowPlaying ->
+        viewModel.getPopular()
+        viewModel.getTopRated()
+        viewModel.nowPlayingMoviesLiveData.observe(viewLifecycleOwner, { nowPlaying ->
             now_playing_rv.also {
                 it.layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -38,6 +41,23 @@ class MoviesFragment : Fragment() {
                 it.adapter = MoviesAdapter(nowPlaying.results)
             }
         })
+        viewModel.popularMoviesLiveData.observe(viewLifecycleOwner, { popular ->
+            popular_rv.also {
+                it.layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                it.setHasFixedSize(true)
+                it.adapter = MoviesAdapter(popular.results)
+            }
+        })
+        viewModel.topRatedMoviesLiveData.observe(viewLifecycleOwner, { topRated ->
+            top_rated_rv.also {
+                it.layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                it.setHasFixedSize(true)
+                it.adapter = MoviesAdapter(topRated.results)
+            }
+        })
+
     }
 
 }

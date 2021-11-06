@@ -1,9 +1,11 @@
-package com.example.themoviedb
+package com.example.themoviedb.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.themoviedb.R
+import com.example.themoviedb.data.model.Result
 import com.example.themoviedb.databinding.ItemMovieBinding
 
 class MoviesAdapter(

@@ -1,4 +1,4 @@
-package com.example.themoviedb
+package com.example.themoviedb.data.model
 
 data class NowPlaying(
     val dates: Dates,
