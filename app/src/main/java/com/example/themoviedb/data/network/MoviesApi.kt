@@ -12,6 +12,9 @@ interface MoviesApi {
     @GET("movie/now_playing?api_key=a01b3ea3824e74e88149e0f4e9818855&page=1&region=IN")
     suspend fun getNowPlayingMovies(): Response<NowPlaying>
 
+    @GET("movie/upcoming?api_key=a01b3ea3824e74e88149e0f4e9818855&page=1&region=IN")
+    suspend fun getUpcomingMovies(): Response<NowPlaying>
+
     @GET("movie/popular?api_key=a01b3ea3824e74e88149e0f4e9818855&page=1&region=IN")
     suspend fun getPopularMovies(): Response<Popular>
 

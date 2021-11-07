@@ -6,13 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.themoviedb.R
+import com.example.themoviedb.data.model.Result
 import com.example.themoviedb.data.network.MoviesApi
 import com.example.themoviedb.data.repositories.MoviesRepository
 import kotlinx.android.synthetic.main.movies_fragment.*
 
-class MoviesFragment : Fragment() {
+class MoviesFragment : Fragment(), MovieClickListener {
 
     private lateinit var factory: MoviesViewModelFactory
     private lateinit var viewModel: MoviesViewModel
@@ -31,33 +33,44 @@ class MoviesFragment : Fragment() {
         factory = MoviesViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory)[MoviesViewModel::class.java]
         viewModel.getNowPlaying()
-        viewModel.getPopular()
-        viewModel.getTopRated()
         viewModel.nowPlayingMoviesLiveData.observe(viewLifecycleOwner, { nowPlaying ->
             now_playing_rv.also {
                 it.layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 it.setHasFixedSize(true)
-                it.adapter = MoviesAdapter(nowPlaying.results)
+                it.adapter = MoviesAdapter(nowPlaying.results, this)
             }
         })
+        viewModel.getUpcoming()
+        viewModel.upcomingMoviesLiveData.observe(viewLifecycleOwner, { upcoming ->
+            upcoming_rv.also {
+                it.layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                it.setHasFixedSize(true)
+                it.adapter = MoviesAdapter(upcoming.results, this)
+            }
+        })
+        viewModel.getPopular()
         viewModel.popularMoviesLiveData.observe(viewLifecycleOwner, { popular ->
             popular_rv.also {
                 it.layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 it.setHasFixedSize(true)
-                it.adapter = MoviesAdapter(popular.results)
+                it.adapter = MoviesAdapter(popular.results,this)
             }
         })
+        viewModel.getTopRated()
         viewModel.topRatedMoviesLiveData.observe(viewLifecycleOwner, { topRated ->
             top_rated_rv.also {
                 it.layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 it.setHasFixedSize(true)
-                it.adapter = MoviesAdapter(topRated.results)
+                it.adapter = MoviesAdapter(topRated.results, this)
             }
         })
-
     }
 
+    override fun onMovieClickListener(view: View, result: Result) {
+        Toast.makeText(requireContext(),result.title,Toast.LENGTH_LONG).show()
+    }
 }

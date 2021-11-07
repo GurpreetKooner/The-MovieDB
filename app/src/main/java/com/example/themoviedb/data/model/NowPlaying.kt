@@ -1,3 +1,4 @@
+// for NowPlaying and Upcoming Movies
 package com.example.themoviedb.data.model
 
 data class NowPlaying(

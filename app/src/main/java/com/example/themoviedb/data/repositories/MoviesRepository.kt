@@ -6,6 +6,7 @@ class MoviesRepository(
     private val api: MoviesApi
 ) : SafeApiRequest() {
     suspend fun getNowPlayingMovies() = apiRequest { api.getNowPlayingMovies() }
+    suspend fun getUpcomingMovies() = apiRequest { api.getUpcomingMovies() }
     suspend fun getPopular() = apiRequest { api.getPopularMovies() }
     suspend fun getTopRated() = apiRequest { api.getTopRatedMovies() }
 }

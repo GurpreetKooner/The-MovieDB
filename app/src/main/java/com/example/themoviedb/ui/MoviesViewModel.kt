@@ -14,10 +14,13 @@ class MoviesViewModel(
 ) : ViewModel() {
     private lateinit var job: Job
     private val nowPlaying = MutableLiveData<NowPlaying>()
+    private val upcoming = MutableLiveData<NowPlaying>()
     private val popular = MutableLiveData<Popular>()
     private val topRated = MutableLiveData<Popular>()
     val nowPlayingMoviesLiveData: LiveData<NowPlaying>
         get() = nowPlaying
+    val upcomingMoviesLiveData: LiveData<NowPlaying>
+        get() = upcoming
     val popularMoviesLiveData: LiveData<Popular>
         get() = popular
     val topRatedMoviesLiveData: LiveData<Popular>
@@ -27,6 +30,12 @@ class MoviesViewModel(
         job = Coroutines.ioThenMain(
             { repository.getNowPlayingMovies() },
             { nowPlaying.value = it }
+        )
+    }
+    fun getUpcoming() {
+        job = Coroutines.ioThenMain(
+            { repository.getUpcomingMovies() },
+            { upcoming.value = it }
         )
     }
     fun getPopular() {

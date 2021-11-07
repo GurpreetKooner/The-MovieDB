@@ -9,7 +9,8 @@ import com.example.themoviedb.data.model.Result
 import com.example.themoviedb.databinding.ItemMovieBinding
 
 class MoviesAdapter(
-    private val movies: List<Result>
+    private val movies: List<Result>,
+    private val listener: MovieClickListener
 ) : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
     inner class MoviesViewHolder(
         val itemMovieBinding: ItemMovieBinding
@@ -28,6 +29,7 @@ class MoviesAdapter(
 
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
         holder.itemMovieBinding.movie = movies[position]
+        holder.itemMovieBinding.root.setOnClickListener { listener.onMovieClickListener(holder.itemMovieBinding.root, movies[position]) }
     }
 
     override fun getItemCount(): Int {

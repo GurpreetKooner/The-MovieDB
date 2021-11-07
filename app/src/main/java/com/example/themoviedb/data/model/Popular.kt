@@ -1,3 +1,4 @@
+// for Popular and TopRated Movies
 package com.example.themoviedb.data.model
 
 data class Popular(

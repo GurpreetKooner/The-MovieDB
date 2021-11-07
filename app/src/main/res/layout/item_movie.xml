@@ -18,83 +18,82 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
-            app:cardCornerRadius="7dp">
+            app:cardCornerRadius="5dp">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
+                <FrameLayout
+                    android:layout_width="match_parent"
                     android:layout_height="250dp">
 
                     <ImageView
                         android:id="@+id/imageView"
                         android:layout_width="wrap_content"
                         android:layout_height="250dp"
-                        android:minWidth="150dp"
+                        android:minWidth="170dp"
                         android:scaleType="centerCrop"
+                        android:src="@drawable/background_black_tint"
                         app:image="@{movie.poster_path}" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:background="@drawable/background_black_tint"
                         android:gravity="center"
                         android:orientation="horizontal"
-                        android:background="@drawable/background_black_tint"
-                        android:paddingLeft="3dp"
-                        android:paddingRight="3dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginStart="5dp">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_star" />
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
 
                         <TextView
-                            android:id="@+id/textViewRating"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:padding="4dp"
-                            android:gravity="center_vertical"
-                            android:text="@{movie.vote_average}"
-                            android:textColor="@android:color/white"
-                            android:textSize="15sp"
-                            tools:text="4.5" />
+                            android:id="@+id/textViewLanguage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            app:language="@{movie.original_language}"
+                            tools:text="English" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center|end"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:src="@drawable/ic_star" />
+
+                            <TextView
+                                android:id="@+id/textViewRating"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="7dp"
+                                android:gravity="center_vertical"
+                                android:text="@{movie.vote_average}"
+                                android:textColor="@android:color/white"
+                                android:textSize="12sp"
+                                tools:text="4.5" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
+                </FrameLayout>
 
-
-                </RelativeLayout>
-
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/textViewTitle"
+                    android:layout_width="170dp"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp">
-
-                    <TextView
-                        android:id="@+id/textViewTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{movie.title}"
-                        android:textSize="15sp"
-                        tools:text="Title" />
-
-                    <TextView
-                        android:id="@+id/textViewLanguage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/textViewTitle"
-                        app:language="@{movie.original_language}"
-                        tools:text="English" />
-
-                </RelativeLayout>
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:text="@{movie.title}"
+                    android:textSize="17sp"
+                    tools:text="Title" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
