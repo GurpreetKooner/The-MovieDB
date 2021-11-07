@@ -10,4 +10,9 @@
         android:name="com.example.themoviedb.ui.MoviesFragment"
         android:label="movies_fragment"
         tools:layout="@layout/movies_fragment" />
+    <fragment
+        android:id="@+id/TVFragment"
+        android:name="com.example.themoviedb.ui.TVFragment"
+        android:label="tv_fragment"
+        tools:layout="@layout/tv_fragment" />
 </navigation>
